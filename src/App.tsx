@@ -136,7 +136,7 @@ const Hero = () => {
           <div className="absolute -top-20 -left-20 w-64 h-64 bg-blue-500/10 blur-[120px] pointer-events-none"></div>
           <h1 className="text-6xl md:text-8xl font-bold text-slate-900 tracking-tighter leading-none mb-8">
             Neurovi@ <br />
-            <span className="text-blue-600">Agentic</span> Intelligence.
+            <span className="text-blue-600">An Intelligent</span> Ecosystem.
           </h1>
           <p className="text-xl text-slate-600 leading-relaxed mb-10 max-w-2xl">
             Transforming productivity with Agent-as-a-Service and Agent Fusion. A strategic framework for autonomous, collaborative, and adaptable AI agents.
