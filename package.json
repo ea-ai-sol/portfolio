@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://ea-ai-sol.github.io/website/",
+  "homepage": "https://ea-ai-sol.github.io/portfolio/",
   "scripts": {
     "dev": "vite --port=3000 --host=0.0.0.0",
     "build": "vite build",
