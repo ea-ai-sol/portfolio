@@ -115,7 +115,7 @@ const Navbar = () => {
 
 const Hero = () => {
   return (
-    <section id="home" className="relative pt-32 pb-20 overflow-hidden bg-white">
+    <section id="home" className="relative pt-32 pb-16 overflow-hidden bg-white">
       {/* Background Blueprint Grid */}
       <div className="absolute inset-0 z-0 opacity-10 pointer-events-none">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#3b82f612_1px,transparent_1px),linear-gradient(to_bottom,#3b82f612_1px,transparent_1px)] bg-[size:40px_40px]"></div>
@@ -141,7 +141,7 @@ const Hero = () => {
           <p className="text-xl text-slate-600 leading-relaxed mb-10 max-w-2xl">
             Transforming productivity with Agent-as-a-Service and Agent Fusion. A strategic framework for autonomous, collaborative, and adaptable AI agents.
           </p>
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-4 mb-4">
             <a href="#ai" className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition-all flex items-center gap-2 group shadow-lg shadow-blue-500/20">
               Explore AaaS
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -150,6 +150,9 @@ const Hero = () => {
               View Architecture
             </a>
           </div>
+          <p className="text-sm text-slate-500 italic max-w-2xl mt-8 border-l-2 border-blue-500 pl-4 py-1">
+            "Governance is not a blocker to innovation; it is the foundation that makes innovation sustainable and safe."
+          </p>
         </motion.div>
       </div>
 
@@ -205,7 +208,7 @@ const Hero = () => {
 
 const AISection = () => {
   return (
-    <section id="ai" className="py-24 bg-slate-50 relative">
+    <section id="ai" className="py-16 bg-slate-50 relative">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
           <div className="max-w-2xl">
@@ -343,7 +346,7 @@ const AISection = () => {
 
 const AboutSection = () => {
   return (
-    <section id="about" className="py-24 bg-white border-y border-slate-200">
+    <section id="about" className="py-16 bg-white border-y border-slate-200">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
@@ -425,7 +428,7 @@ const AboutSection = () => {
 
 const ContactSection = () => {
   return (
-    <section id="contact" className="py-24 bg-slate-50">
+    <section id="contact" className="py-16 bg-slate-50">
       <div className="max-w-7xl mx-auto px-6 text-center">
         <h2 className="text-5xl font-bold text-slate-900 mb-8 tracking-tight">Let's Ideate Together</h2>
         <p className="text-xl text-slate-600 mb-12 max-w-2xl mx-auto">
@@ -486,7 +489,7 @@ const StrategicFramework = () => {
   ];
 
   return (
-    <section className="py-24 bg-slate-50 border-y border-slate-200">
+    <section className="py-16 bg-slate-50 border-y border-slate-200">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-slate-900 mb-4">Strategic Framework</h2>
@@ -520,7 +523,7 @@ const TechStack = () => {
   ];
 
   return (
-    <section className="py-24 bg-white">
+    <section className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-wrap justify-center gap-8 md:gap-16 opacity-60 hover:opacity-100 transition-opacity">
           {techs.map((tech, idx) => (
@@ -560,7 +563,7 @@ const AIGovernance = () => {
   ];
 
   return (
-    <section id="governance" className="py-24 bg-white relative overflow-hidden">
+    <section id="governance" className="py-16 bg-white relative overflow-hidden">
       <div className="absolute top-1/2 left-0 w-64 h-64 bg-purple-600/5 blur-[120px] pointer-events-none"></div>
       
       <div className="max-w-7xl mx-auto px-6">
@@ -593,12 +596,6 @@ const AIGovernance = () => {
               </div>
             </motion.div>
           ))}
-        </div>
-
-        <div className="mt-16 p-8 rounded-3xl bg-slate-50 border border-dashed border-slate-200 text-center">
-          <p className="text-slate-500 italic">
-            "Governance is not a blocker to innovation; it is the foundation that makes innovation sustainable and safe."
-          </p>
         </div>
       </div>
     </section>
