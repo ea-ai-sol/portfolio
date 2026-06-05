@@ -24,12 +24,14 @@ import {
   ShieldCheck,
   Lock,
   Scale,
-  Eye
+  Eye,
+  ArrowLeft
 } from 'lucide-react';
+import { articleContent } from './articleContent';
 
 // --- Components ---
 
-const Navbar = () => {
+const Navbar = ({ isArticleView }: { isArticleView?: boolean }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -39,7 +41,9 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = [
+  const navLinks = isArticleView ? [
+    { name: 'Back to Home', href: '#home' }
+  ] : [
     { name: 'Home', href: '#home' },
     { name: 'AI & AaaS', href: '#ai' },
     { name: 'Governance', href: '#governance' },
@@ -50,12 +54,12 @@ const Navbar = () => {
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/80 backdrop-blur-md border-b border-slate-200 py-4 shadow-sm' : 'bg-transparent py-6'}`}>
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+        <a href="#home" className="flex items-center gap-2 group">
+          <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform">
             <Brain className="text-white w-5 h-5" />
           </div>
           <span className={`text-xl font-bold tracking-tighter transition-colors ${isScrolled ? 'text-slate-900' : 'text-slate-900'}`}>Neurovi@</span>
-        </div>
+        </a>
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-8">
@@ -63,17 +67,20 @@ const Navbar = () => {
             <a 
               key={link.name} 
               href={link.href} 
-              className={`text-sm font-medium transition-colors ${isScrolled ? 'text-slate-600 hover:text-blue-600' : 'text-slate-600 hover:text-blue-600'}`}
+              className={`text-sm font-medium transition-colors flex items-center gap-2 ${isScrolled ? 'text-slate-600 hover:text-blue-600' : 'text-slate-600 hover:text-blue-600'}`}
             >
+              {isArticleView && <ArrowLeft className="w-4 h-4" />}
               {link.name}
             </a>
           ))}
-          <a 
-            href="#contact" 
-            className="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-full transition-all"
-          >
-            Get in Touch
-          </a>
+          {!isArticleView && (
+            <a 
+              href="#contact" 
+              className="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-full transition-all"
+            >
+              Get in Touch
+            </a>
+          )}
         </div>
 
         {/* Mobile Menu Toggle */}
@@ -99,9 +106,10 @@ const Navbar = () => {
                 <a 
                   key={link.name} 
                   href={link.href} 
-                  className="text-lg font-medium text-slate-600 hover:text-blue-600"
+                  className="text-lg font-medium text-slate-600 hover:text-blue-600 flex items-center gap-2"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
+                  {isArticleView && <ArrowLeft className="w-4 h-4" />}
                   {link.name}
                 </a>
               ))}
@@ -235,52 +243,55 @@ const AISection = () => {
             <div className="relative z-10">
               <div className="flex items-center gap-2 text-blue-600 text-xs font-bold uppercase tracking-widest mb-6">
                 <Zap className="w-4 h-4" />
-                <span>Strategic Framework</span>
+                <span>Agent-as-a-Service Architecture</span>
               </div>
-              <h3 className="text-3xl font-bold text-slate-900 mb-6 leading-tight">AaaS & Agent Fusion: <br />Transforming Organizational Productivity</h3>
-              <p className="text-slate-600 text-lg leading-relaxed mb-8 max-w-xl">
-                Modern organizations are on the cusp of a productivity revolution. Agentic AI enables autonomous, collaborative, and adaptable AI agents across organizational processes, moving beyond simple automation to intelligent decision-making.
+              <h3 className="text-3xl font-bold text-slate-900 mb-6 leading-tight">Delivering Intelligence as a Standalone Cloud Service</h3>
+              <p className="text-slate-600 text-base leading-relaxed mb-6 max-w-xl">
+                In the Agent-as-a-Service (AaaS) model, an AI agent operates as an intelligent layer that sits on top of enterprise data. Its architecture typically consists of a reasoning engine (LLM) as the "brain," access to relevant data sources for context, and tool interfaces to dynamically execute actions.
+              </p>
+              <p className="text-slate-600 text-base leading-relaxed mb-8 max-w-xl">
+                Traditional automation required developers to integrate systems via hand-crafted APIs or RPA scripts. In contrast, AaaS utilizes a data-driven, goal-driven approach—reasoning over data and autonomously orchestrating actions.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
                 <div className="p-4 bg-white rounded-xl border border-slate-200 shadow-sm">
                   <h4 className="text-slate-900 font-bold mb-2 flex items-center gap-2">
                     <Cpu className="w-4 h-4 text-blue-600" />
-                    Autonomous Planning
+                    Planning & Reasoning
                   </h4>
-                  <p className="text-xs text-slate-500">Agents that can decompose complex goals into actionable steps without human intervention.</p>
+                  <p className="text-xs text-slate-500">Formulating a dynamic chain-of-thought to resolve inquiries using enterprise knowledge.</p>
                 </div>
                 <div className="p-4 bg-white rounded-xl border border-slate-200 shadow-sm">
                   <h4 className="text-slate-900 font-bold mb-2 flex items-center gap-2">
-                    <Network className="w-4 h-4 text-purple-600" />
-                    Agent Fusion
+                    <Database className="w-4 h-4 text-blue-600" />
+                    Data Integration
                   </h4>
-                  <p className="text-xs text-slate-500">Multi-agent systems where specialized agents collaborate to solve cross-functional challenges.</p>
+                  <p className="text-xs text-slate-500">Retrieval-Augmented Generation (RAG) over data lakes to establish real-time context.</p>
                 </div>
               </div>
-              <button className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition-all flex items-center gap-2 shadow-lg shadow-blue-500/20">
-                Read Full Blueprint
+              <a href="#article" className="inline-flex px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition-all items-center gap-2 shadow-lg shadow-blue-500/20">
+                Read Full Article
                 <ArrowRight className="w-4 h-4" />
-              </button>
+              </a>
             </div>
           </motion.div>
 
           {/* Sidebar Insights */}
           <div className="flex flex-col gap-6">
-            <div className="p-8 rounded-3xl bg-white border border-slate-200 shadow-sm">
+            <div className="p-8 rounded-3xl bg-white border border-slate-200 shadow-sm hover:border-purple-300 transition-colors">
+              <div className="flex items-center gap-3 mb-4 text-purple-600">
+                <Network className="w-5 h-5" />
+                <span className="text-xs font-bold uppercase tracking-widest">Agent Fusion</span>
+              </div>
+              <h4 className="text-lg font-bold text-slate-900 mb-2">Multi-Agent Systems</h4>
+              <p className="text-slate-600 text-sm">Multiple specialized AI agents collaborating under a "supervisor" orchestrator that breaks down high-level goals into parallel sub-tasks.</p>
+            </div>
+            <div className="p-8 rounded-3xl bg-white border border-slate-200 shadow-sm hover:border-blue-300 transition-colors">
               <div className="flex items-center gap-3 mb-4 text-blue-600">
-                <Database className="w-5 h-5" />
+                <Layers className="w-5 h-5" />
                 <span className="text-xs font-bold uppercase tracking-widest">Data-Centric AI</span>
               </div>
-              <h4 className="text-lg font-bold text-slate-900 mb-2">Beyond APIs: Data Fusion</h4>
-              <p className="text-slate-600 text-sm">Conceptual Architecture – Enabling AaaS and Agent Fusion on Data, not just static APIs.</p>
-            </div>
-            <div className="p-8 rounded-3xl bg-white border border-slate-200 opacity-60 shadow-sm">
-              <div className="flex items-center gap-3 mb-4 text-slate-400">
-                <Layers className="w-5 h-5" />
-                <span className="text-xs font-bold uppercase tracking-widest">R.A.G Frameworks</span>
-              </div>
-              <h4 className="text-lg font-bold text-slate-900 mb-2">RAG Architectures</h4>
-              <p className="text-slate-500 text-sm">Coming soon: Deep dive into Retrieval-Augmented Generation for enterprise knowledge.</p>
+              <h4 className="text-lg font-bold text-slate-900 mb-2">Beyond Static APIs</h4>
+              <p className="text-slate-600 text-sm">A shift from programming strict workflows to orchestrating intelligence dynamically directly upon the organization's broad data foundation.</p>
             </div>
           </div>
         </div>
@@ -356,13 +367,13 @@ const AboutSection = () => {
             <h2 className="text-5xl font-bold text-slate-900 mb-8 tracking-tight">Farrukh Iqbal</h2>
             <div className="space-y-6 text-slate-600 leading-relaxed">
               <p>
-                A seasoned Enterprise and Solution Architect with over 20 years of international experience spanning banking, education, telecommunications, healthcare, and aviation sectors.
+                A seasoned Enterprise and Solution Architect with over 19 years of international experience spanning banking, education, telecommunications, healthcare, and aviation sectors.
               </p>
               <p>
-                Currently strategizing and architecting cutting-edge Generative AI, Agentic AI, and RAG-based solutions. Farrukh has a strong track record of delivering complex digital transformations at organizations like Westpac NZ and Air New Zealand.
+                Currently strategizing and architecting cutting-edge Generative AI, Agentic AI, and RAG-based solutions. Farrukh has a strong track record of delivering complex digital transformations, including leadership roles at Westpac NZ, Air New Zealand, and multiple universities, where he has overseen large teams, cloud modernization, DevSecOps practices, and enterprise-wide architecture.
               </p>
               <p>
-                His expertise bridges strategic vision and technical execution, underpinned by skills in Azure, AWS, CI/CD, and enterprise integration.
+                His expertise bridges strategic vision and technical execution, underpinned by skills in Azure, AWS, CI/CD, and enterprise integration. Recognized for his leadership and innovation, he is also a certified Agile practitioner and a graduate of the CAUDIT Leadership Institute.
               </p>
             </div>
             
@@ -374,6 +385,7 @@ const AboutSection = () => {
                   { name: 'Azure Fundamentals', logo: 'https://images.credly.com/images/be8fcaeb-c769-4858-b567-ffaaa73ce8cf/image.png', isBadge: true },
                   { name: 'AWS', logo: 'https://images.credly.com/images/e1449791-a907-49be-a76d-c8d2723923e5/image.png', isBadge: true },
                   { name: 'PMI-ACP', logo: 'https://images.credly.com/images/f5c094f4-e07c-44e0-b685-4ffd8980fd53/blob', isBadge: true },
+                  { name: 'ICAgile', logo: 'https://images.credly.com/images/1cf84ab9-3cc4-432a-bc91-dec6b0808cf7/image.png', isBadge: true },
                   { name: 'OpenAI', logo: 'https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg' },
                   { name: 'Anthropic', logo: 'data:image/png;base64,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', isSmall: true },
                 ].map(cert => (
@@ -603,19 +615,79 @@ const AIGovernance = () => {
 };
 
 export default function App() {
+  const [currentHash, setCurrentHash] = useState(window.location.hash);
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      setCurrentHash(window.location.hash);
+      if (window.location.hash !== '#article') {
+        const element = document.querySelector(window.location.hash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  const isArticleView = currentHash === '#article';
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 selection:bg-blue-100">
-      <Navbar />
+      <Navbar isArticleView={isArticleView} />
       <main>
-        <Hero />
-        <TechStack />
-        <AISection />
-        <AIGovernance />
-        <StrategicFramework />
-        <AboutSection />
-        <ContactSection />
+        {isArticleView ? (
+          <ArticleView />
+        ) : (
+          <>
+            <Hero />
+            <TechStack />
+            <AISection />
+            <AIGovernance />
+            <StrategicFramework />
+            <AboutSection />
+            <ContactSection />
+          </>
+        )}
       </main>
       <Footer />
     </div>
   );
 }
+
+const ArticleView = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  return (
+    <article className="pt-32 pb-24 max-w-3xl mx-auto px-6" id="article">
+      <a href="#home" className="inline-flex items-center gap-2 text-blue-600 font-medium mb-12 hover:bg-blue-50 px-4 py-2 rounded-full transition-colors">
+        <ArrowLeft className="w-4 h-4" /> Back to Portfolio
+      </a>
+      
+      <div className="space-y-6">
+        {articleContent.map((block, i) => {
+          if (block.tag === 'H1') return <h1 key={i} className="text-4xl md:text-5xl font-bold text-slate-900 mb-8 tracking-tight leading-tight">{block.text}</h1>;
+          if (block.tag === 'H2') return <h2 key={i} className="text-3xl font-bold text-slate-900 mt-16 mb-6">{block.text}</h2>;
+          if (block.tag === 'H3') return <h3 key={i} className="text-2xl font-bold text-slate-900 mt-12 mb-4">{block.text}</h3>;
+          if (block.tag === 'LI') return (
+            <li key={i} className="text-slate-600 mb-2 list-disc ml-6 leading-relaxed bg-slate-50 border border-slate-100 pl-2 pr-4 py-2 rounded-lg">
+              {block.href && block.href.startsWith('http') ? (
+                <a href={block.href} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                  {block.text}
+                </a>
+              ) : (
+                block.text
+              )}
+            </li>
+          );
+          if (block.tag === 'P') return <p key={i} className="text-lg text-slate-600 leading-relaxed mb-6">{block.text}</p>;
+          return <p key={i} className="text-lg text-slate-600 mb-6">{block.text}</p>;
+        })}
+      </div>
+    </article>
+  );
+};
